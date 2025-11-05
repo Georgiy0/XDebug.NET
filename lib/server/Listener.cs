@@ -109,7 +109,7 @@ public class Listener
             await SendCommands(commands, stream);
 
             // read responses
-            while (true)
+            while (client.Connected)
             {
                 size = ReadSize(stream);
                 if (size == null)

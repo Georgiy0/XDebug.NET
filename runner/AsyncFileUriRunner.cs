@@ -2,7 +2,7 @@ namespace xdebugnet.runner;
 
 using xdebugnet.lib.server;
 
-public static class AsyncRunner
+public static class AsyncFileUriRunner
 {
     private static Listener? _listener;
     public static async Task Run(System.String[] args)

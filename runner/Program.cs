@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using xdebugnet.runner;
+﻿using xdebugnet.runner;
 
-AsyncRunner.Run(args).GetAwaiter().GetResult();
+// AsyncFileUriRunner.Run(args).GetAwaiter().GetResult();
+AsyncTracerRunner.Run(args).GetAwaiter().GetResult();

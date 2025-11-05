@@ -1,6 +1,6 @@
-using System.Text;
-
 namespace xdebugnet.lib.command;
+
+using System.Text;
 
 public class EvalCommand : CommandBase
 {
@@ -10,9 +10,9 @@ public class EvalCommand : CommandBase
         _toEval = toEval;
     }
 
-    public override string Name => "eval";
+    public override System.String Name => "eval";
 
-    protected override string SerializeArguments()
+    protected override System.String SerializeArguments()
     {
         return $"-- {Convert.ToBase64String(Encoding.ASCII.GetBytes(_toEval))}";
     }

@@ -24,7 +24,14 @@ internal class FileUriTransactionServer : TransactionServer
         var evalCorrelator = new EvalCommand("$_REQUEST['" + _correlator + "'];"); // NOTE: escape correlator value
         AddTransaction(evalUri, HandleEvalUri); // send eval command to collect HTTP URL
         AddTransaction(evalCorrelator, HandleEvalCorrelator); // send eval command to collect additional correlactor GET/POST parameter
-        return new List<CommandBase>() { evalUri, evalCorrelator };
+        var run = new RunCommand();
+        var stop = new StopCommand();
+        AddTransaction(run, _ =>
+        {
+            AddTransaction(stop, _ => EmptyCommandsList);
+            return new List<CommandBase>() { stop };
+        });
+        return new List<CommandBase>() { evalUri, evalCorrelator, run };
     }
 
     public IList<CommandBase> HandleEvalUri(ResponseMessage responseMessage)
