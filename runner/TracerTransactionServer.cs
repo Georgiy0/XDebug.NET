@@ -63,9 +63,27 @@ internal class TracerTransactionServer : TransactionServer
             Console.WriteLine($"[{_stepCnt}]: {stepResponse.Message.FileUri}:{stepResponse.Message.LineNumber}");
             _trace.Enqueue(stepResponse.Message);
             var stepInto = new StepIntoCommand();
+            var getStack = new StackGetCommand();
+            var getPhpLine = EvalCommand.GetPhpFileLineEval(stepResponse.Message.FileUri, stepResponse.Message.LineNumber);
+            AddTransaction(getStack, GetStackHandler);
             AddTransaction(stepInto, TraceHandler);
-            return [stepInto];
+            AddTransaction(getPhpLine, GetPhpLineHandler);
+            return [getStack, getPhpLine, stepInto];
         }
+    }
+
+    public IList<CommandBase> GetStackHandler(ResponseMessage responseMessage)
+    {
+        var stackResponse = responseMessage.Reserialize<StackResponseMessage>();
+        return EmptyCommandsList;
+    }
+    
+    public IList<CommandBase> GetPhpLineHandler(ResponseMessage responseMessage)
+    {
+        var evalResponse = responseMessage.Reserialize<EvalResponseMessage>();
+        var line = evalResponse.Property.GetData();
+        Console.WriteLine($"PHP line: {line}");
+        return EmptyCommandsList;
     }
 
     public override void OnExit()

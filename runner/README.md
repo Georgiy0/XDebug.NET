@@ -22,6 +22,8 @@ file:///usr/local/www/some_php_file.php,/actual_url.php?query_string_param=1&__c
 
 A tool that collects request processing trace via `step_into` command. Request should include `?__correlator=__do_trace` parameter in order to trigger trace collection.
 
+It also demonstates the usage of `EvalCommand.GetPhpFileLineEval` for reading current PHP code line that corresponds to trace location.
+
 E.g. execution trace may be used in VS code to crossreference with application codebase.
 
 _Note:_ loop iterations with body length exceeding 1 code line are not dedublicated from execution trace (i.e. execution trace may be bloated with loop iterations).

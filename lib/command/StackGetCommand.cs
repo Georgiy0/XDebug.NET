@@ -1,7 +1,7 @@
 namespace xdebugnet.lib.command;
 
-public class StepIntoCommand : CommandBase
+public class StackGetCommand : CommandBase
 {
-    public override System.String Name => "step_into";
+    public override System.String Name => "stack_get";
     protected override System.String SerializeArguments() => System.String.Empty;
 }

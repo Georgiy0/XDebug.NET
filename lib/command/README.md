@@ -9,3 +9,4 @@ Classes in `xdebugnet.lib.command` namespace implement XDebug commands such as:
 |3|`StopCommand`|`stop`|terminate debugging session|
 |4|`StepOverCommand`|`step_over`|tracing command (step over)|
 |5|`StepIntoCommand`|`step_into`|tracing command (step into)|
+|6|`StackGetCommand`|`stack_get`|retrieve stack trace to current break location|
